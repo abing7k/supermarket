@@ -1,9 +1,9 @@
 package com.example.server.service.impl;
 
-import com.example.server.pojo.Type;
-import com.example.server.mapper.TypeMapper;
-import com.example.server.service.ITypeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.server.mapper.TypeMapper;
+import com.example.server.pojo.Type;
+import com.example.server.service.ITypeService;
 import org.springframework.stereotype.Service;
 
 /**

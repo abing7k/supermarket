@@ -1,7 +1,7 @@
 package com.example.server.service;
 
-import com.example.server.pojo.Type;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.server.pojo.Type;
 
 /**
  * <p>

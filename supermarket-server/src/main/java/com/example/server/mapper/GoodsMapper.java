@@ -1,7 +1,7 @@
 package com.example.server.mapper;
 
-import com.example.server.pojo.Goods;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.server.pojo.Goods;
 
 /**
  * <p>

@@ -1,15 +1,17 @@
 package com.example.server.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -51,6 +53,7 @@ public class Goods implements Serializable {
     private Integer state;
 
     @ApiModelProperty(value = "是否被删除(1代表删除)")
+    @TableLogic
     private Integer deleted;
 
     @ApiModelProperty(value = "创建时间")

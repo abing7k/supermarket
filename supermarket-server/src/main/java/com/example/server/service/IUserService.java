@@ -1,7 +1,10 @@
 package com.example.server.service;
 
-import com.example.server.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.server.pojo.RespBean;
+import com.example.server.pojo.User;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<User> {
 
+    RespBean login(String username, String password, String code, HttpServletRequest request);
 }

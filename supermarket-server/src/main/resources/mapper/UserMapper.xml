@@ -11,6 +11,7 @@
         <result column="tel" property="tel" />
         <result column="integral" property="integral" />
         <result column="balance" property="balance" />
+        <result column="enabled" property="enabled"/>
         <result column="deleted" property="deleted" />
         <result column="create_time" property="createTime" />
         <result column="modified_time" property="modifiedTime" />
@@ -18,7 +19,13 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, r_id, name, pwd, tel, integral, balance, deleted, create_time, modified_time
+        id, r_id, name, pwd, tel, integral, balance, enabled, deleted, create_time, modified_time
     </sql>
+    <select id="getUserByName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user where name = #{name}
+    </select>
+
 
 </mapper>
