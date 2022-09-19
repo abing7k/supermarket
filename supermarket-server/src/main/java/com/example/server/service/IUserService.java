@@ -3,6 +3,7 @@ package com.example.server.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.server.pojo.RespBean;
 import com.example.server.pojo.User;
+import com.example.server.pojo.UserRegist;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,4 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface IUserService extends IService<User> {
 
     RespBean login(String username, String password, String code, HttpServletRequest request);
+
+    RespBean addUser(UserRegist user);
 }

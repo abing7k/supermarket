@@ -5,6 +5,7 @@ import com.example.server.config.security.JwtTokenUtils;
 import com.example.server.mapper.UserMapper;
 import com.example.server.pojo.RespBean;
 import com.example.server.pojo.User;
+import com.example.server.pojo.UserRegist;
 import com.example.server.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -71,4 +72,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         tokenMap.put("tokenHead", tokenHead);
         return RespBean.success("登录成功", tokenMap);
     }
+
+    @Override
+    public RespBean addUser(UserRegist userRegist) {
+        if (userRegist.getRid()==1){
+            return RespBean.error("您没有权限创建管理员");
+        }
+        if (userInsert(userRegist)>0){
+            return RespBean.success("创建成功");
+        }else{
+            return RespBean.error("创建失败");
+        }
+    }
+
+
+    private int userInsert(UserRegist userRegist){
+        User user = new User();
+        user.setId(userRegist.getRid());
+        user.setId(userRegist.getRid());
+        user.setId(userRegist.getRid());
+        user.setId(userRegist.getRid());
+        return userMapper.insert(user);
+    }
+
 }

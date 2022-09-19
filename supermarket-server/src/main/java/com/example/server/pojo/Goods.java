@@ -50,7 +50,7 @@ public class Goods implements Serializable {
     private Float discount;
 
     @ApiModelProperty(value = "1-正常，0-下架（库存数量为0了）")
-    private Integer state;
+    private Integer enabled;
 
     @ApiModelProperty(value = "是否被删除(1代表删除)")
     @TableLogic
