@@ -1,7 +1,7 @@
 package com.example.server.config.security;
 
 import com.example.server.mapper.UserMapper;
-import com.example.server.pojo.User;
+import com.example.server.pojo.User.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

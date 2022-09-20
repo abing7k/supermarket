@@ -1,4 +1,4 @@
-package com.example.server.pojo;
+package com.example.server.pojo.User;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -6,8 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.experimental.Accessors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -55,6 +57,9 @@ public class User implements Serializable, UserDetails {
     @ApiModelProperty(value = "用户余额")
     private Float balance;
 
+    //有bug,解决办法:
+    // https://blog.csdn.net/licheetools/article/details/106316583
+    @Getter(value = AccessLevel.NONE)
     @ApiModelProperty(value = "是否启用")
     private Boolean enabled;
 

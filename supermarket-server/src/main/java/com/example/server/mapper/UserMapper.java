@@ -1,10 +1,8 @@
 package com.example.server.mapper;
-import java.util.List;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.server.pojo.User;
+import com.example.server.pojo.User.User;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>

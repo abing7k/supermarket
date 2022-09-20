@@ -1,7 +1,7 @@
 package com.example.server.controller;
 
 import com.example.server.pojo.RespBean;
-import com.example.server.pojo.UserLoginParam;
+import com.example.server.pojo.User.UserLoginParam;
 import com.example.server.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
