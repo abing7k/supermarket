@@ -1,5 +1,6 @@
 package com.example.server;
 
+import com.example.server.mapper.CartMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class TestEncoder {
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    CartMapper cartMapper;
+
 
     //$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe
     //$2a$10$XUDAAUSIUK6NzoHpHS83q.9UV5I3.u.TUqvthsLqGg/G1N7sNuAiC
@@ -31,6 +35,11 @@ public class TestEncoder {
 //        System.out.println(matches2);
 
         //System.out.println(passwordEncoder.matches(passwordEncoder.encode("123"), "123"));
+    }
+
+    @Test
+    public void test02(){
+        System.out.println(cartMapper.getCartByUidAndGid(1, 1));
     }
 
 }

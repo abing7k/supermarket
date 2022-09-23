@@ -18,4 +18,16 @@
         id, u_id, g_id, count, deleted, create_time, modified_time
     </sql>
 
+    <select id="getIdByName" resultType="int">
+        select id
+        from goods
+        where name = #{name,jdbcType=VARCHAR} and deleted = 0
+    </select>
+
+    <select id="getCartByUidAndGid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cart where u_id= #{uid} and g_id = #{gid} and deleted = 0
+    </select>
+
 </mapper>

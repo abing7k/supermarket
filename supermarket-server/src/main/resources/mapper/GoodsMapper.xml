@@ -10,7 +10,7 @@
         <result column="number" property="number" />
         <result column="price" property="price" />
         <result column="discount" property="discount" />
-        <result column="state" property="state" />
+        <result column="enabled" property="enabled" />
         <result column="deleted" property="deleted" />
         <result column="create_time" property="createTime" />
         <result column="modified_time" property="modifiedTime" />
@@ -20,5 +20,12 @@
     <sql id="Base_Column_List">
         id, name, t_id, number, price, discount, state, deleted, create_time, modified_time
     </sql>
+    <select id="getIdByName" resultType="int">
+        select id
+        from goods
+        where name = #{name,jdbcType=VARCHAR} and deleted = 0
+    </select>
+
+
 
 </mapper>
