@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
-            //这里按照教学视频会报循环注入的错,所以不能用IAdminService,只能用AdminMapper来查询
+            //会报循环注入的错,所以不能用IAdminService,只能用AdminMapper来查询
             User user = userMapper.getUserByName(username);
             if (user != null) {
                 return user;

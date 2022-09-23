@@ -1,4 +1,4 @@
-package com.example.server.pojo;
+package com.example.server.pojo.Goods;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

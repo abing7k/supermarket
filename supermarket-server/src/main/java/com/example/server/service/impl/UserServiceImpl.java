@@ -1,6 +1,9 @@
 package com.example.server.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.server.Utils.SqlUtils;
 import com.example.server.config.security.JwtTokenUtils;
 import com.example.server.mapper.UserMapper;
 import com.example.server.pojo.RespBean;
@@ -20,6 +23,7 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,6 +45,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private PasswordEncoder passwordEncoder;
     @Autowired
     private JwtTokenUtils jwtTokenUtils;
+
+    @Autowired
+    SqlUtils sqlUtils;
 
     @Value("${jwt.tokenHead}")
     private String tokenHead;
@@ -79,7 +86,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public RespBean addUser(UserRegist userRegist, HttpServletRequest request) {
         System.out.println("getUsername" + request.getSession().getAttribute("username"));
-        if (getIdByName((String) request.getSession().getAttribute("username")) != 1) {
+        if (sqlUtils.getIdByName((String) request.getSession().getAttribute("username")) != 1) {
             return RespBean.error("您没有权限创建用户");
         }
 
@@ -87,7 +94,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return RespBean.error("您没有权限创建管理员");
         }
 
-        if (getIdByName(userRegist.getName()) != -1) {
+        if (sqlUtils.getIdByName(userRegist.getName()) != -1) {
             return RespBean.error("用户名重复,请重新创建");
         }
 
@@ -110,13 +117,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public RespBean changeUser(UserChange userChange, HttpServletRequest request) {
-        if (getIdByName((String) request.getSession().getAttribute("username")) == 1) {
-            //信息只能被管理员修改
-            if (getIdByName(userChange.getName()) == -1) {
+        if (sqlUtils.getIdByName((String) request.getSession().getAttribute("username")) == 1) { //信息只能被管理员修改
+
+            if (sqlUtils.getIdByName(userChange.getName()) == -1) {
                 return RespBean.error("无此用户");
             }
 
-            if (getIdByName(userChange.getRname()) != -1) {
+            if (sqlUtils.getIdByName(userChange.getRname()) != -1) {
                 return RespBean.error("用户名已被占用");
             }
 
@@ -130,28 +137,90 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
     }
 
+    @Override
+    public RespBean deleteUser(String username) {
+        int id = sqlUtils.getIdByName(username);
+        if (id != -1) {
+            if (deleteById(id) > 0) {
+                return RespBean.success("删除成功");
+            }else {
+                return RespBean.error("删除失败");
+            }
+        }else {
+            return RespBean.error("未找到该用户");
+        }
+    }
+
+    @Override
+    public RespBean selectUser(String username,HttpServletRequest request) {
+        if (sqlUtils.getIdByName((String) request.getSession().getAttribute("username")) == 1) {
+            return RespBean.success("查看成功",like(username));
+        }else {
+            return RespBean.error("无权查看");
+        }
+    }
+
+    @Override
+    //充值会员
+    public RespBean recharge(String username, float money, HttpServletRequest request) {
+        if (sqlUtils.getIdByName((String) request.getSession().getAttribute("username")) == 1) {
+
+            if (sqlUtils.getIdByName(username) == -1) {
+                return RespBean.error("无此用户");
+            }
+
+            if (rechargeMoney(username,money)>0) {
+                return RespBean.success("充值成功");
+            }else {
+                return RespBean.error("充值失败");
+            }
+        }else {
+            return RespBean.error("无权充值");
+        }
+    }
+
+    private int rechargeMoney(String username, float money){
+        int id = sqlUtils.getIdByName(username);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        User user = userMapper.selectById(id); //查出要充值的对象
+        user.setBalance(user.getBalance()+money); //充值
+        return userMapper.updateById(user);
+    }
+
+    private List<User> like(String username){
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.like("name", username);
+        return userMapper.selectList(userQueryWrapper);
+    }
+
+    private int deleteById(int id) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        return userMapper.deleteByMap(map);
+    }
 
     private int userInsert(User user) {
         return userMapper.insert(user);
     }
 
-    private int getIdByName(String username) {
-        User userByName = userMapper.getUserByName(username);
-        if (userByName != null) {
-            return userByName.getId();
-        } else {
-            return -1;
-        }
-    }
+//    private int sqlUtils.getIdByName(String username) {
+//        User userByName = userMapper.getUserByName(username);
+//        if (userByName != null) {
+//            return userByName.getId();
+//        } else {
+//            return -1;
+//        }
+//    }
 
     private int change(UserChange userChange) {
         User user = new User();
-        int id = getIdByName(userChange.getName());
+        int id = sqlUtils.getIdByName(userChange.getName());
 
         user.setId(id);
         user.setName(userChange.getRname());
         user.setPwd(passwordEncoder.encode(userChange.getPwd()));
-        if (!userChange.getTel().equals("")){
+        if (!userChange.getTel().equals("")) {
             user.setTel(userChange.getTel());
         }
         user.setIntegral(userChange.getIntegral());

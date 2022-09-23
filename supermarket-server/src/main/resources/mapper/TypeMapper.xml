@@ -3,7 +3,7 @@
 <mapper namespace="com.example.server.mapper.TypeMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.example.server.pojo.Type">
+    <resultMap id="BaseResultMap" type="com.example.server.pojo.Goods.Type">
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="father" property="father" />
@@ -17,5 +17,23 @@
     <sql id="Base_Column_List">
         id, name, father, description, deleted, create_time, modified_time
     </sql>
+    <select id="getTypeByName" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from type
+        where name = #{name,jdbcType=VARCHAR} and deleted =0
+    </select>
+
+
+    <select id="getIdByName" resultType="int">
+        select id
+        from type
+        where name = #{name,jdbcType=VARCHAR} and deleted =0
+    </select>
+
+    <select id="getTypeByFather" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from type where father = #{father} and deleted =0
+    </select>
 
 </mapper>

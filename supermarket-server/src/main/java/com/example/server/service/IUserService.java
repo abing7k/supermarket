@@ -24,4 +24,10 @@ public interface IUserService extends IService<User> {
     RespBean addUser(UserRegist userRegist,HttpServletRequest request);
 
     RespBean changeUser(UserChange userChange, HttpServletRequest request);
+
+    RespBean deleteUser(String username);
+
+    RespBean selectUser(String username,HttpServletRequest request);
+
+    RespBean recharge(String username, float money, HttpServletRequest request);
 }

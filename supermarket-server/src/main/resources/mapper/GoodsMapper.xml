@@ -3,7 +3,7 @@
 <mapper namespace="com.example.server.mapper.GoodsMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.example.server.pojo.Goods">
+    <resultMap id="BaseResultMap" type="com.example.server.pojo.Goods.Goods">
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="t_id" property="tId" />
