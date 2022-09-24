@@ -18,7 +18,9 @@ import com.example.server.pojo.Goods.Goods;
  */
 @Mapper
 public interface GoodsMapper extends BaseMapper<Goods> {
-    int getIdByName(@Param("name") String name);
+    Integer getIdByName(@Param("name") String name);
 
+    Goods getGoodsByName(String name);
 
+    String getNameById(@Param("id") Integer id);
 }

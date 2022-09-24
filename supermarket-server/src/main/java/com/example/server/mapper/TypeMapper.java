@@ -21,4 +21,6 @@ public interface TypeMapper extends BaseMapper<Type> {
     Integer getIdByName(@Param("name") String name);
 
     List<Type> getTypeByFather(int father);
+
+    String getNameById(@Param("id") Integer id);
 }

@@ -1,5 +1,6 @@
 package com.example.server;
 
+import com.example.server.mapper.BillsMapper;
 import com.example.server.mapper.CartMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,8 @@ public class TestEncoder {
     private PasswordEncoder passwordEncoder;
     @Autowired
     CartMapper cartMapper;
+    @Autowired
+    BillsMapper billsMapper;
 
 
     //$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe
@@ -41,5 +44,16 @@ public class TestEncoder {
     public void test02(){
         System.out.println(cartMapper.getCartByUidAndGid(1, 1));
     }
+
+    @Test
+    public void test03(){
+        System.out.println(billsMapper.getAllByUId(1));
+    }
+
+    @Test
+    public void test04() {
+        System.out.println(billsMapper.getTop());
+    }
+
 
 }

@@ -35,5 +35,10 @@
         <include refid="Base_Column_List"/>
         from type where father = #{father} and deleted =0
     </select>
+    <select id="getNameById" resultType="String">
+        select name
+        from type
+        where id = #{id,jdbcType=NUMERIC} and deleted =0
+    </select>
 
 </mapper>

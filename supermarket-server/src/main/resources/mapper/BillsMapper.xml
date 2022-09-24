@@ -17,5 +17,25 @@
     <sql id="Base_Column_List">
         id, u_id, g_id, count, price, create_time, modified_time
     </sql>
+    <select id="getAllByUId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bills
+        where
+        u_id = #{uId,jdbcType=NUMERIC}
+    </select>
+
+    <select id="getAllByGId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bills
+        where
+        g_id = #{gId,jdbcType=NUMERIC}
+    </select>
+
+
+    <select id="getTop" resultType="java.util.Map">
+        SELECT SUM(count) ,g_id from  bills  GROUP BY g_id LIMIT 0,10
+    </select>
 
 </mapper>

@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 20/09/2022 13:58:32
+ Date: 24/09/2022 17:57:05
 */
 
 SET NAMES utf8mb4;
@@ -55,7 +55,7 @@ CREATE TABLE `cart`  (
 -- ----------------------------
 -- Records of cart
 -- ----------------------------
-INSERT INTO `cart` VALUES (1, 1, 1, 10, 0, '2022-09-14 10:40:14', NULL);
+INSERT INTO `cart` VALUES (1, 1, 1, 0, 0, '2022-09-24 14:09:10', '2022-09-24 14:09:10');
 
 -- ----------------------------
 -- Table structure for goods
@@ -73,12 +73,13 @@ CREATE TABLE `goods`  (
                           `create_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
                           `modified_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '删除时间',
                           PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES (1, '汉堡', 1, 999, 10, 10, 1, 0, '2022-09-14 10:39:44', NULL);
+INSERT INTO `goods` VALUES (1, '汉堡2', 1, 989, 11, 10, 1, 0, '2022-09-24 16:09:00', '2022-09-24 16:09:00');
+INSERT INTO `goods` VALUES (3, '炸鸡', 1, 100, 10, 10, 1, 0, '2022-09-24 16:12:09', '2022-09-24 16:12:09');
 
 -- ----------------------------
 -- Table structure for role
@@ -91,7 +92,7 @@ CREATE TABLE `role`  (
                          `create_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
                          `modified_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
                          PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role
@@ -119,6 +120,9 @@ CREATE TABLE `type`  (
 -- Records of type
 -- ----------------------------
 INSERT INTO `type` VALUES (1, '食品', 0, NULL, 0, '2022-09-14 10:38:05', NULL);
+INSERT INTO `type` VALUES (2, '11', 0, '1', 0, '2022-09-23 21:28:36', '2022-09-23 21:28:36');
+INSERT INTO `type` VALUES (3, 't2', 1, '2', 0, '2022-09-23 21:16:09', '2022-09-23 21:16:09');
+INSERT INTO `type` VALUES (4, 't3', 0, NULL, 1, '2022-09-23 21:41:45', '2022-09-23 21:41:45');
 
 -- ----------------------------
 -- Table structure for user
@@ -137,13 +141,15 @@ CREATE TABLE `user`  (
                          `create_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
                          `modified_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
                          PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (0000000001, 1, 'hanbing', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', '15993056607', 100, 1000, 0, 1, '2022-09-14 10:27:37', NULL);
 INSERT INTO `user` VALUES (0000000002, 2, 'zhangsan', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', '110', 10, 1000, 0, 1, '2022-09-19 17:27:35', NULL);
-INSERT INTO `user` VALUES (0000000003, 3, 'demo03', '$2a$10$q00XieyAcIvEzQoQOWWapOBdXuodmi0SPTWpxFQlGnjq3.cIdjjHO', '120', 1000, 1, 0, 1, '2022-09-20 13:49:28', '2022-09-20 13:56:16');
+INSERT INTO `user` VALUES (0000000003, 3, 'demo02', '$2a$10$I.WmsSJaBP9abyKmrlE.c.6ymxOmZ2YTUQmK8bRalXCGwHNCE96zK', '120', 1000, 667, 0, 1, '2022-09-20 15:20:43', '2022-09-20 15:20:43');
+INSERT INTO `user` VALUES (0000000004, 2, '111', '$2a$10$ogvUqZZAxrBwrmVI/e7.SuFYyx8my8d.9zJ6bs9lPKWvbD9eefyCe', '', NULL, 1, 0, 1, '2022-09-20 16:09:10', '2022-09-20 16:09:10');
+INSERT INTO `user` VALUES (0000000005, 2, 't1', '$2a$10$fJiWqwisFyrDFbV6fGNpoOE0ddO/WDj2ZmQy28AataNDBxmrL11c.', '', NULL, NULL, 0, 1, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

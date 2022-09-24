@@ -54,7 +54,7 @@ public class Goods implements Serializable {
 
     @ApiModelProperty(value = "是否被删除(1代表删除)")
     @TableLogic
-    private Integer deleted;
+    private Boolean deleted;
 
     @ApiModelProperty(value = "创建时间")
     @TableField("create_time")

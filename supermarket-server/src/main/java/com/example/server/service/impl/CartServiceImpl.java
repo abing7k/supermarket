@@ -109,7 +109,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
         return cartMapper.getIdByName(name);
     }
 
-    private int getGidByGname(String name) {
+    private Integer getGidByGname(String name) {
         return goodsMapper.getIdByName(name);
     }
 
