@@ -31,4 +31,7 @@ public class GoodsController {
     public RespBean payGoods(String uName, String gName, HttpServletRequest request) {
         return goodsService.pay(uName, gName,request);
     }
+
+
+
 }

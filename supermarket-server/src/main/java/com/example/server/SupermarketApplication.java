@@ -2,7 +2,9 @@ package com.example.server;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  * @PROJECT_NAME: supermarket
@@ -10,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @USER: 韩冰
  * @DATE: 2022/9/14 0014 11:06
  */
-@SpringBootApplication
+@SpringBootApplication()
 @MapperScan("com.example.server.mapper")
 public class SupermarketApplication {
     public static void main(String[] args) {

@@ -90,7 +90,7 @@ public class TypeServiceImpl extends ServiceImpl<TypeMapper, Type> implements IT
     public RespBean typeShow(String name, HttpServletRequest request) {
 
         if (sqlUtils.getIdByName((String) request.getSession().getAttribute("username")) != 1) {
-            return RespBean.error("您没有权限更改商品类型");
+            return RespBean.error("您没有权限查看商品类型");
         }
 
         return RespBean.success("查询成功", like(name));

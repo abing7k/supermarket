@@ -26,7 +26,7 @@ import java.util.HashMap;
  * @author hanbing
  * @since 2022-09-14
  */
-@Mapper
+@Service
 public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements IGoodsService {
 
     @Autowired
@@ -42,16 +42,28 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
     @Override
     public RespBean pay(String uName, String gName, HttpServletRequest request) {
+        System.err.println(uName);
         if (sqlUtils.getIdByName((String) request.getSession().getAttribute("username")) != 2) {
             return RespBean.error("您不是收银员");
         }
 
-        int uid = sqlUtils.getIdByName(gName);
+
+        int uid = sqlUtils.getIdByName(uName);
         Integer gid = getGidByGname(gName);
         Cart cart = cartMapper.getCartByUidAndGid(uid, gid);
+
+        if (cart == null) {
+            return RespBean.error("购物车无此商品");
+        }
+
         Goods goods = getGoodsById(gid);
         Integer count = cart.getCount();
         Long number = goods.getNumber();
+
+        if (count <= 0) {
+            return RespBean.error("购物车无此商品");
+        }
+
         if (count > number) {
             return RespBean.error("数量不足,您购物车有" + count + "个,而库存只有" + number + "个");
         }
@@ -63,7 +75,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         if (updateCartNumber(cart, count) > 0 && updateGoodsNumber(goods, count) > 0 &&
                 addBill(uid, gid, count, count * goods.getPrice() * goods.getDiscount()) > 0) {
             return RespBean.success("购买成功");
-        }else {
+        } else {
             return RespBean.error("购买失败");
         }
 
@@ -83,7 +95,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     }
 
     private int updateGoodsNumber(Goods goods, int count) {
-        goods.setDiscount(goods.getDiscount() - count);
+        goods.setNumber(goods.getNumber() - count);
         return goodsMapper.updateById(goods);
     }
 

@@ -85,7 +85,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public RespBean addUser(UserRegist userRegist, HttpServletRequest request) {
-        System.out.println("getUsername" + request.getSession().getAttribute("username"));
         if (sqlUtils.getIdByName((String) request.getSession().getAttribute("username")) != 1) {
             return RespBean.error("您没有权限创建用户");
         }
